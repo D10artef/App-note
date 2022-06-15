@@ -3,7 +3,7 @@ import { getDateNow, getTimeNow } from '../utilities/dateFunction'
 import {InputText, TextArea, InputDate, InputTime} from './Form'
 import {MdPostAdd} from 'react-icons/md'
 
-const AddNote = () => {
+const AddNote = ({onCloseModal, onSaveNewNote}) => {
   const [newNote, setNewNote] = useState({
     id: Date.now(),
     title: '',
@@ -31,18 +31,25 @@ const AddNote = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    
+    const note = { ...newNote,
+      id: Date.now(),    
+      add_date: Date.now(),
+    }
+    onSaveNewNote(note)
+    resetNewNote()
+    onCloseModal()
   }
 
   const handleReset = (event) => {
     event.preventDefault()
     resetNewNote()
+    onCloseModal()
     
   }
 
 
   return (
-    <form onSubmit={handleSubmit} onReset={handleReset} className='flex flex-col gap-3 w-72 md:w-96 px-3 py-4 border dark:border-none rounded-sm md:rounded shadow dark:bg-main-card-dark'>
+    <form onSubmit={handleSubmit} onReset={handleReset} className='flex flex-col gap-3 w-72 md:w-96 px-3 py-4 border dark:border-none rounded-sm md:rounded shadow bg-neutral-50 dark:bg-main-card-dark'>
       <h1 className='flex gap-x-2 justify-center items-scretch font-semibold text-tiny tracking-wider text-slate-600/70 dark:text-slate-500 mb-2'><span>Nouvelle Note </span><span className='text-xl'><MdPostAdd/></span></h1>
       <InputText value={newNote.title} onChange={handleChange} name='title' maxLength={35} placeholder='Titre'></InputText>
       <InputText value={newNote.location} onChange={handleChange} name='location' maxLength={35} placeholder='Lieu (optionel)'></InputText>

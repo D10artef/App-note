@@ -1,7 +1,7 @@
 import React from 'react'
 import {MdOutlineDelete, MdDone} from 'react-icons/md'
 
-const Note = ({note}) => {
+const Note = ({note, onToggle}) => {
 
   let doneClassName = 'duration-500 cursor-pointer '
   doneClassName += note.done ? ' text-emerald-600 dark:text-teal-600' : ' text-slate-300 hover:text-slate-400 dark:text-gray-700 dark:hover:text-gray-600'
@@ -11,7 +11,7 @@ const Note = ({note}) => {
   }
 
   const handleDone = (id) => {
-    console.log(id)
+    onToggle(id)
   }
 
   return (
