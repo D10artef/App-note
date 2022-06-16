@@ -7,7 +7,7 @@ export const InputText = ({name, value, maxLength, placeholder, onChange}) => {
   }
 
   return (
-    <input type="text" id={name} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange} className='input-base'/>
+    <input type="text" id={name} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange} className='input-base px-1'/>
   )
 }
 
@@ -16,7 +16,7 @@ export const TextArea = ({name, value, maxLength, placeholder, onChange}) => {
     onChange({name, value:event.target.value})
   }
   return (
-    <textarea id={name} name={name} maxLength={maxLength} placeholder={placeholder}  value={value}  onChange={handleChange} className='input-base resize-none'></textarea>
+    <textarea id={name} name={name} maxLength={maxLength} placeholder={placeholder}  value={value}  onChange={handleChange} className='input-base resize-none px-1'></textarea>
   )
 }
 
@@ -25,7 +25,7 @@ export const InputDate = ({name, value, min, onChange}) => {
     onChange({name, value:event.target.value})
   }
   return (
-    <input type="date" name={name} id={name} min={min}  value={value} onChange={handleChange} className='input-base'/>
+    <input type="date" name={name} id={name} min={min}  value={value} onChange={handleChange} className='input-base px-1'/>
   )
 }
 
@@ -34,13 +34,6 @@ export const InputTime = ({name, value, onChange}) => {
     onChange({name, value:event.target.value})
   }
   return (
-    <input type="time" name={name} id={name}  value={value} onChange={handleChange} className='input-base'/>
-  )
-}
-
-export const Button = ({type, otherClass , children}) => {
-  const className = ' ' + otherClass
-  return (
-    <Button type={type} className={className}>{children}</Button>
+    <input type="time" name={name} id={name}  value={value} onChange={handleChange} className='input-base px-1'/>
   )
 }
