@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Notes from './components/Notes'
 import AddNote from './components/AddNote'
+import ConfirmNoteDeletion from './components/ConfirmNoteDeletion'
 import Header from './components/Header'
 import Modal from './components/Modal'
 
@@ -23,7 +24,10 @@ const App = () => {
     //   done: true,
     // }
   ])
-  const [showAddModal, setShowAddModal] = useState(true)
+  const [deletedId, setDeletedId] = useState(null)
+  const [searchText, setSearchtext] = useState('')
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   // Load notes from web storage
   useEffect(()=> {
@@ -41,8 +45,18 @@ const App = () => {
   const closeAddModal = () => {
     setShowAddModal(false)
   }
+
   const openAddModal = () => {
     setShowAddModal(true)
+  }
+
+  const closeConfirmModal = () => {
+    setShowConfirmModal(false)
+  }
+
+  const openConfirmModal = (id) => {
+    setDeletedId(id)
+    setShowConfirmModal(true)
   }
 
   // Save new Note
@@ -69,13 +83,22 @@ const App = () => {
     setNotes(updatedNotes)
   }
 
+  const handleDeleteNote = (id) => {
+    const updatedNotes = notes.filter(note => note.id !== id)
+    setNotes(updatedNotes)
+    setDeletedId(null)
+  }
+
   return (
     <div className='min-h-screen bg-neutral-100 text-zinc-800 dark:bg-[#242432] dark:text-neutral-300'>
-      <Header></Header>
+      <Header onOpenAddModal={openAddModal}></Header>
       <Modal show={showAddModal} onClose={closeAddModal}>
         <AddNote onSaveNewNote={handleSaveNewNote} onCloseModal={closeAddModal} />
       </Modal>
-      <Notes onToggleNote={handleToggleNote} notes={notes}></Notes>
+      <Modal show={showConfirmModal} onClose={closeConfirmModal}>
+        <ConfirmNoteDeletion id={deletedId} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNote}></ConfirmNoteDeletion>
+      </Modal>
+      <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={notes}></Notes>
     </div>
   )
 }

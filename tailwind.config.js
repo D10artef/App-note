@@ -11,6 +11,7 @@ module.exports = {
 			fontSize: {
 				tiny: ".95rem",
 				xtiny: ".85rem",
+				xxtiny: ".8rem",
 			},
 		},
 		screens: {

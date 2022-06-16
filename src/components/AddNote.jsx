@@ -49,7 +49,7 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
 
 
   return (
-    <form onSubmit={handleSubmit} onReset={handleReset} className='flex flex-col gap-3 w-72 md:w-96 px-3 py-4 border dark:border-none rounded-sm md:rounded shadow bg-neutral-50 dark:bg-main-card-dark'>
+    <form onSubmit={handleSubmit} onReset={handleReset} className='flex flex-col gap-3 w-72 md:w-96 px-3 py-4 border dark:border-none rounded-sm md:rounded shadow bg-neutral-50 dark:bg-header-card-dark'>
       <h1 className='flex gap-x-2 justify-center items-scretch font-semibold text-tiny tracking-wider text-slate-600/70 dark:text-slate-500 mb-2'><span>Nouvelle Note </span><span className='text-xl'><MdPostAdd/></span></h1>
       <InputText value={newNote.title} onChange={handleChange} name='title' maxLength={35} placeholder='Titre'></InputText>
       <InputText value={newNote.location} onChange={handleChange} name='location' maxLength={35} placeholder='Lieu (optionel)'></InputText>
@@ -62,7 +62,7 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
         <InputTime value={newNote.time} onChange={handleChange} name='time'></InputTime>
       </div>
       <div className='flex justify-end gap-x-3'>
-        <button type="reset" className='button-base bg-gray-200/70 hover:bg-gray-100/70 text-gray-600 mt-2 '>Annuler</button>
+        <button type="reset" className='button-base bg-gray-200/70 hover:bg-gray-100/70 text-gray-600 mt-2'>Annuler</button>
         <button type="submit" className='button-base bg-slate-600 hover:bg-slate-700 text-slate-50 dark:bg-gray-700 dark:hover:bg-slate-700 mt-2'>Ajouter</button>
       </div>
     </form>

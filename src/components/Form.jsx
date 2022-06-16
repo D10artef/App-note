@@ -37,3 +37,10 @@ export const InputTime = ({name, value, onChange}) => {
     <input type="time" name={name} id={name}  value={value} onChange={handleChange} className='input-base'/>
   )
 }
+
+export const Button = ({type, otherClass , children}) => {
+  const className = ' ' + otherClass
+  return (
+    <Button type={type} className={className}>{children}</Button>
+  )
+}
