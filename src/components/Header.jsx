@@ -3,7 +3,7 @@ import {MdPostAdd} from 'react-icons/md'
 
 const Header = ({onOpenAddModal}) => {
   return (
-    <div className='pb-2 border-b mb-6 dark:border-gray-700/70'>
+    <div className='pb-2 mb-6'>
       <h1 className='text-3xl text-center pb-4 pt-8 md:pt-12 font-medium text-slate-400/70 tracking-widest dark:text-gray-500'>MemoS</h1>
       <p className='text-center text-sm pb-4 md:pb-8 text-slate-400 dark:text-gray-400'>Gardez vos notes quotidiennes</p>
       <div className='flex gap-x-3 px-2'>

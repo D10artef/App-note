@@ -4,26 +4,12 @@ import AddNote from './components/AddNote'
 import ConfirmNoteDeletion from './components/ConfirmNoteDeletion'
 import Header from './components/Header'
 import Modal from './components/Modal'
+import { compareNoteByDate, getDateNow } from './utilities/UtilitiesFunction'
 
 const NOTES_KEY = 'react-note-app'
 
 const App = () => {
-  const [notes, setNotes] = useState([
-    // {
-    //   id:1,
-    //   title: 'test',
-    //   content: 'Lorem ispum esperarar',
-    //   location:'At home',
-    //   done: false,
-    // },
-    // {
-    //   id:2,
-    //   title: 'essaye',
-    //   content: 'Lorem ispum esperarar',
-    //   location: 'ISPM',
-    //   done: true,
-    // }
-  ])
+  const [notes, setNotes] = useState([])
   const [deletedId, setDeletedId] = useState(null)
   const [searchText, setSearchtext] = useState('')
   const [showAddModal, setShowAddModal] = useState(false)
@@ -65,13 +51,13 @@ const App = () => {
     setNotes(newNotes)
   }
 
-  const getTodoIndex = (arr, id) => {
+  const getNoteIndex = (arr, id) => {
     return arr.findIndex(el => el.id === id)
   }
 
-  // Toggle Todo if it is done or not
+  // Toggle note if it is done or not
   const handleToggleNote = (id) => {
-    const noteIndex = getTodoIndex(notes, id)
+    const noteIndex = getNoteIndex(notes, id)
     const note = {...notes.find(el => el.id === id)}
     note.done = !note.done
     if(noteIndex === -1){
@@ -83,10 +69,26 @@ const App = () => {
     setNotes(updatedNotes)
   }
 
+  // Delete note from the array
   const handleDeleteNote = (id) => {
     const updatedNotes = notes.filter(note => note.id !== id)
     setNotes(updatedNotes)
     setDeletedId(null)
+  }
+
+  function filterNotes(arr, text){
+    return arr.filter(note => (note.title.toLowerCase().includes(text.toLowerCase()) || note.content.toLowerCase().includes(searchText.toLowerCase())))
+  }
+
+  function todayNotes(){
+    return notes
+		.filter((note) => note.date === getDateNow());
+  }
+  
+  function otherNotes() {
+	  return notes
+		  .filter((note) => note.date !== getDateNow())
+		  .sort(compareNoteByDate);
   }
 
   return (
@@ -98,7 +100,22 @@ const App = () => {
       <Modal show={showConfirmModal} onClose={closeConfirmModal}>
         <ConfirmNoteDeletion id={deletedId} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNote}></ConfirmNoteDeletion>
       </Modal>
-      <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={notes}></Notes>
+      <div>
+        <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Aujourd'hui</h1>
+        {
+          todayNotes() && (todayNotes()).length > 0 ?
+          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={todayNotes()}></Notes>
+          : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
+        }
+      </div>
+      <div>
+        <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Autres</h1>
+        {
+          otherNotes() && (otherNotes()).length > 0 ?
+          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={otherNotes()}></Notes>
+          : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
+        }
+      </div>
     </div>
   )
 }

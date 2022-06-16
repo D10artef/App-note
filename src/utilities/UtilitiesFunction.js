@@ -69,3 +69,10 @@ export function dateToString(date) {
 		}
 	}
 }
+
+// Sort function by date
+export function compareNoteByDate(itemOne, itemTwo){
+	const date_one = new Date(itemOne.date)
+	const date_two = new Date(itemTwo.date);
+	return date_one - date_two
+}

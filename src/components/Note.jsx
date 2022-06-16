@@ -1,6 +1,6 @@
 import React from 'react'
 import {MdOutlineDelete, MdDone} from 'react-icons/md'
-import {dateToString, getDateNow} from '../utilities/dateFunction'
+import {dateToString, getDateNow} from '../utilities/UtilitiesFunction'
 
 const Note = ({note, onToggle, onDelete}) => {
 
@@ -24,10 +24,10 @@ const Note = ({note, onToggle, onDelete}) => {
         }
         </header>
       <main className='px-3 py-2 bg-zinc-100 dark:bg-main-card-dark'>
-        <p className='text-xxtiny md:text-xtiny text-gray-600 dark:text-neutral-300 font-light'>{note.content}</p>
+        <p className='text-xxtiny md:text-xtiny text-gray-600 dark:text-neutral-300 font-light capitalize'>{note.content}</p>
       </main>
       <footer className='px-3 py-2 flex justify-between dark:bg-main-card-dark'>
-        <span className='text-xs text-sky-800 dark:text-sky-600'>{note.location}</span>
+        <span className='text-xs text-sky-800 dark:text-sky-600 capitalize'>{note.location}</span>
         <div className='flex justify-end items-center gap-3'>
           <span className='text-red-400 dark:text-rose-600 hover:text-red-500 duration-600 cursor-pointer' onClick={()=>handleDelete(note.id)}><MdOutlineDelete/></span>
           <span className={doneClassName} onClick={()=>handleDone(note.id)}><MdDone/></span>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getDateNow, getTimeNow } from '../utilities/dateFunction'
+import { getDateNow, getTimeNow } from '../utilities/UtilitiesFunction'
 import {InputText, TextArea, InputDate, InputTime} from './Form'
 import {MdPostAdd} from 'react-icons/md'
 
