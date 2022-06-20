@@ -7,11 +7,16 @@ import Modal from './components/Modal'
 import { compareNoteByDate, getDateNow } from './utilities/UtilitiesFunction'
 
 const NOTES_KEY = 'react-note-app'
+const STATES = ['all', 'done', 'not_done']
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [deletedId, setDeletedId] = useState(null)
-  const [searchText, setSearchtext] = useState('')
+  // const [searchText, setSearchtext] = useState('')
+  const [searchFilter, setSearchFilter] = useState({
+    text: '',
+    state: STATES[0],
+  })
   const [showAddModal, setShowAddModal] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
@@ -76,12 +81,21 @@ const App = () => {
     setDeletedId(null)
   }
 
-  const handleSearchTextChange = (value) => {
-    setSearchtext(value)
+  // const handleSearchTextChange = (value) => {
+  //   setSearchtext(value)
+  // }
+
+  const handleSearchFilterChange = (name, value) => {
+    setSearchFilter((prev) => {
+      return{
+        ...prev,
+        [name]:value,
+      }
+    })
   }
 
-  function filterNotes(data, text){
-    return data.filter(note => (note.title.toLowerCase().includes(text.toLowerCase()) || note.content.toLowerCase().includes(searchText.toLowerCase())))
+  function filterNotes(data, filter){
+    return data.filter(note => ((note.title.toLowerCase().includes(filter.text.toLowerCase()) || note.content.toLowerCase().includes(filter.text.toLowerCase()))))
   }
 
   function todayNotes(){
@@ -97,7 +111,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen bg-neutral-100 text-zinc-800 dark:bg-[#242432] dark:text-neutral-300'>
-      <Header onOpenAddModal={openAddModal} onSearchTextChange={handleSearchTextChange}></Header>
+      <Header onOpenAddModal={openAddModal} onSearchFilterChange={handleSearchFilterChange}></Header>
       <Modal show={showAddModal} onClose={closeAddModal}>
         <AddNote onSaveNewNote={handleSaveNewNote} onCloseModal={closeAddModal} />
       </Modal>
@@ -107,16 +121,16 @@ const App = () => {
       <div>
         <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Aujourd'hui</h1>
         {
-          todayNotes() && filterNotes(todayNotes(), searchText).length > 0 ?
-          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(todayNotes(), searchText)}></Notes>
+          todayNotes() && filterNotes(todayNotes(), searchFilter).length > 0 ?
+          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(todayNotes(), searchFilter)}></Notes>
           : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
         }
       </div>
       <div>
         <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Autres</h1>
         {
-          otherNotes() && filterNotes(otherNotes(), searchText).length > 0 ?
-          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(otherNotes(), searchText)}></Notes>
+          otherNotes() && filterNotes(otherNotes(), searchFilter).length > 0 ?
+          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(otherNotes(), searchFilter)}></Notes>
           : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
         }
       </div>
