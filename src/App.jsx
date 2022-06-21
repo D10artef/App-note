@@ -12,7 +12,6 @@ const STATES = ['all', 'done', 'not_done']
 const App = () => {
   const [notes, setNotes] = useState([])
   const [deletedId, setDeletedId] = useState(null)
-  // const [searchText, setSearchtext] = useState('')
   const [searchFilter, setSearchFilter] = useState({
     text: '',
     state: STATES[0],
@@ -95,7 +94,13 @@ const App = () => {
   }
 
   function filterNotes(data, filter){
-    return data.filter(note => ((note.title.toLowerCase().includes(filter.text.toLowerCase()) || note.content.toLowerCase().includes(filter.text.toLowerCase()))))
+    if(filter.state === STATES[1]){
+      return data.filter(note => ((note.title.toLowerCase().includes(filter.text.toLowerCase()) || note.content.toLowerCase().includes(filter.text.toLowerCase())) && note.done))
+    }else if(filter.state === STATES[2]){
+      return data.filter(note => ((note.title.toLowerCase().includes(filter.text.toLowerCase()) || note.content.toLowerCase().includes(filter.text.toLowerCase())) && !note.done ))
+    }else{
+      return data.filter(note => (note.title.toLowerCase().includes(filter.text.toLowerCase()) || note.content.toLowerCase().includes(filter.text.toLowerCase())))
+    }
   }
 
   function todayNotes(){
@@ -111,7 +116,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen bg-neutral-100 text-zinc-800 dark:bg-[#242432] dark:text-neutral-300'>
-      <Header onOpenAddModal={openAddModal} onSearchFilterChange={handleSearchFilterChange}></Header>
+      <Header onOpenAddModal={openAddModal} onSearchFilterChange={handleSearchFilterChange} state={searchFilter.state}></Header>
       <Modal show={showAddModal} onClose={closeAddModal}>
         <AddNote onSaveNewNote={handleSaveNewNote} onCloseModal={closeAddModal} />
       </Modal>
