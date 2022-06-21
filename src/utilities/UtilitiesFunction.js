@@ -1,18 +1,4 @@
-const months = {
-	"01": "Janv",
-	"02": "Fev",
-	"03": "Mars",
-	"04": "Avril",
-	"05": "Mai",
-	"06": "Juin",
-	"07": "Juil",
-	"08": "Août",
-	"09": "Sept",
-	10: "Oct",
-	11: "Nov",
-	12: "Dec",
-};
-
+import { MONTHS } from "./UtilitiesCONST";
 export function format2Digit(val) {
 	return String(val).padStart(2, "0");
 }
@@ -63,9 +49,9 @@ export function dateToString(date) {
 		let date_array = date.split("-");
 
 		if (sameOr === 3) {
-			return date_array[2] + " " + months[date_array[1]] + " " + date_array[0];
+			return date_array[2] + " " + MONTHS[date_array[1]] + " " + date_array[0];
 		} else {
-			return date_array[2] + " " + months[date_array[1]];
+			return date_array[2] + " " + MONTHS[date_array[1]];
 		}
 	}
 }

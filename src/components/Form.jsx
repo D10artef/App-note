@@ -1,4 +1,6 @@
 import React from 'react'
+import { BiGridAlt } from 'react-icons/bi'
+import { MdDoneAll, MdRemoveDone } from 'react-icons/md' 
 
 export const InputText = ({name, value, maxLength, placeholder, onChange}) => {
 
@@ -38,18 +40,25 @@ export const InputTime = ({name, value, onChange}) => {
   )
 }
 
-export const ButtonStateNote = ({onButtonClick, state, children}) => {
+export const ButtonStateNote = ({onButtonClick, state}) => {
   let className = 'button-base flex gap-x-1 items-center '
-  if(state === 'note') {
+  let text = 'Toutes les notes'
+  let icon = <BiGridAlt/>
+  if(state === 'done') {
     className += ' bg-emerald-200/80 text-emerald-700 dark:text-emerald-200 hover:bg-emerald-200 border-emerald-300 dark:bg-emerald-700/70 dark:hover:bg-emerald-700/60'
+    text = 'Notes achevées'
+    icon = <MdDoneAll/>
   }else if(state === 'not_done'){
-    className += ' text-rose-600 dark:text-rose-200 hover:bg-rose-100 border-rose-200 dark:bg-rose-600/60 dark:hover:bg-rose-600/80'
+    className += 'bg-rose-100/80 text-rose-600 dark:text-rose-200 hover:bg-rose-100 border-rose-200 dark:bg-rose-600/60 dark:hover:bg-rose-600/80'
+    text = 'Notes non achevées'
+    icon = <MdRemoveDone/>
   }else {
     className += ' bg-neutral-300/80 text-gray-700 dark:text-neutral-300 hover:bg-neutral-200 dark:bg-neutral-600/60 dark:hover:bg-neutral-600/90'
   }
   return (
     <button className={className} onClick={onButtonClick}>
-      {children}
+      <span className='hidden xs:inline'>{text}</span>
+      <span className='text-lg py-0.5'>{icon}</span>
     </button>
   )
 }

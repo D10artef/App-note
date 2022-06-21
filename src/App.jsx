@@ -5,9 +5,9 @@ import ConfirmNoteDeletion from './components/ConfirmNoteDeletion'
 import Header from './components/Header'
 import Modal from './components/Modal'
 import { compareNoteByDate, getDateNow } from './utilities/UtilitiesFunction'
+import {STATES} from './utilities/UtilitiesCONST'
 
 const NOTES_KEY = 'react-note-app'
-const STATES = ['all', 'done', 'not_done']
 
 const App = () => {
   const [notes, setNotes] = useState([])
