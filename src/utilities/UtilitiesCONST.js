@@ -14,7 +14,7 @@ export const MONTHS = {
 	"07": "Juil",
 	"08": "Août",
 	"09": "Sept",
-	10: "Oct",
-	11: "Nov",
-	12: "Dec",
+	"10": "Oct",
+	"11": "Nov",
+	"12": "Dec",
 };
