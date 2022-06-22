@@ -13,7 +13,7 @@ const FieldNotes = ({title, filtredNotes, handleToggleNote, openConfirmModal, fi
         <h1 className="font-semibold text-slate-600 dark:text-slate-300">{title}</h1>
         { 
           filtredNotes && filtredNotes.length > 0 ? 
-          <button className="text-red-500 px-2 dark:text-rose-600/80 focus:outline-none focus:text-red-500/80 hover:text-red-500/80 dark:hover:text-rose-600 dark:focus:text-rose-600 text-xs underline cursor-pointer" onClick={handleClick}>Effacer</button> : ''
+          <button className="text-red-500 px-2 dark:text-rose-500/80 focus:outline-none focus:text-red-500/80 hover:text-red-500/80 dark:hover:text-rose-600 dark:focus:text-rose-600 text-xs underline cursor-pointer" onClick={handleClick}>Effacer</button> : ''
         }
       </div>
       {

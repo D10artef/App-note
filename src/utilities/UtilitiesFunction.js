@@ -17,7 +17,7 @@ export function getDateNow() {
 export function getTimeNow() {
 	let today = new Date();
 	return [
-		format2Digit(today.getHours()),
+		format2Digit(today.getHours()) ,
 		format2Digit(today.getMinutes()),
 	].join(":");
 }

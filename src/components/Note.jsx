@@ -7,10 +7,7 @@ const Note = ({note, onToggle, onDelete}) => {
   let doneClassName = 'duration-500 cursor-pointer '
   doneClassName += note.done ? ' text-emerald-600 dark:text-teal-600' : ' text-slate-300 hover:text-slate-400 dark:text-gray-700 dark:hover:text-gray-600'
 
-  // const handleDelete = (id) => {
-  //   onDelete(id)
-  // }
-
+  //Delete array to the list, in this case, the single note
   const handleDelete = (array) => {
     onDelete(array)
   }

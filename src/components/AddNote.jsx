@@ -13,6 +13,8 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
     date: getDateNow(),
     time: getTimeNow(),
   })
+  const [error, setError] = useState(false)
+  const [errorText, setErrorText] = useState('')
 
 
   const handleChange = (data) => {
@@ -35,16 +37,24 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
       id: Date.now(),    
       add_date: Date.now(),
     }
-    onSaveNewNote(note)
-    resetNewNote()
-    onCloseModal()
+    if(note.title.length > 5){
+      onSaveNewNote(note)
+      resetNewNote()
+      onCloseModal()
+    }else{
+      setError(true)
+      setErrorText('Le titre est trop court (min: 5)')
+      setTimeout(() => setError(false), 5000)
+    }
+    
   }
 
   const handleReset = (event) => {
     event.preventDefault()
     resetNewNote()
+    setError(false)
+    setErrorText('')
     onCloseModal()
-    
   }
 
 
@@ -61,6 +71,12 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
         </div>
         <InputTime value={newNote.time} onChange={handleChange} name='time'></InputTime>
       </div>
+      {error ? 
+        <div className='text-center px-2 py-1.5 bg-red-100 border border-red-200 dark:bg-pink-600 dark:border-pink-600 rounded'>
+          <p className='text-xs text-red-500 dark:text-pink-200'>{errorText}</p>
+        </div>
+        : ''
+      }
       <div className='flex justify-end gap-x-3'>
         <button type="reset" className='button-base bg-gray-200/70 hover:bg-gray-100/70 text-gray-600 mt-2'>Annuler</button>
         <button type="submit" className='button-base bg-slate-600 hover:bg-slate-700 text-slate-50 dark:bg-gray-700 dark:hover:bg-slate-700 mt-2'>Ajouter</button>
