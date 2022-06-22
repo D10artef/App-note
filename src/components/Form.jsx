@@ -41,7 +41,7 @@ export const InputTime = ({name, value, onChange}) => {
 }
 
 export const ButtonStateNote = ({onButtonClick, state}) => {
-  let className = 'button-base flex gap-x-1 items-center '
+  let className = 'button-base flex gap-x-1 items-center'
   let text = 'Toutes les notes'
   let icon = <BiGridAlt/>
   if(state === 'done') {
@@ -49,7 +49,7 @@ export const ButtonStateNote = ({onButtonClick, state}) => {
     text = 'Notes achevées'
     icon = <MdDoneAll/>
   }else if(state === 'not_done'){
-    className += 'bg-rose-100/80 text-rose-600 dark:text-rose-200 hover:bg-rose-100 border-rose-200 dark:bg-rose-600/60 dark:hover:bg-rose-600/80'
+    className += 'bg-rose-100/80 text-rose-600 dark:text-rose-200 hover:bg-rose-100 border-rose-200 dark:bg-rose-600/60 dark:hover:bg-rose-600/70'
     text = 'Notes non achevées'
     icon = <MdRemoveDone/>
   }else {
@@ -57,7 +57,7 @@ export const ButtonStateNote = ({onButtonClick, state}) => {
   }
   return (
     <button className={className} onClick={onButtonClick}>
-      <span className='hidden xs:inline'>{text}</span>
+      <span className='hidden sm:inline'>{text}</span>
       <span className='text-lg py-0.5'>{icon}</span>
     </button>
   )

@@ -24,7 +24,8 @@ const Header = ({onOpenAddModal, onSearchFilterChange, state}) => {
         <div className="flex gap-x-2">
           <button className='button-base bg-neutral-200/80 text-gray-600 dark:text-neutral-300 hover:bg-neutral-200 dark:bg-neutral-700/60 dark:hover:bg-neutral-700/90 flex gap-x-1 items-center' onClick={()=>onOpenAddModal()}>
             <span className='hidden xs:inline'>Ajouter</span>
-            <span className='text-lg py-0.5'><MdPostAdd/></span></button>
+            <span className='text-lg py-0.5'><MdPostAdd/></span>
+          </button>
           <ButtonStateNote state={state} onButtonClick={handleClick}/>
         </div>
         <div className='flex gap-x-3 md:gap-x-4 items-end'>
@@ -34,7 +35,6 @@ const Header = ({onOpenAddModal, onSearchFilterChange, state}) => {
               <GoSearch></GoSearch>
             </span>
           </div>
-          
         </div>
       </div>
     </div>

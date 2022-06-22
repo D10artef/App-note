@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import Notes from './components/Notes'
 import AddNote from './components/AddNote'
 import ConfirmNoteDeletion from './components/ConfirmNoteDeletion'
 import Header from './components/Header'
 import Modal from './components/Modal'
+import FieldNotes from './components/FieldNotes'
 import { compareNoteByDate, getDateNow } from './utilities/UtilitiesFunction'
 import {STATES} from './utilities/UtilitiesCONST'
+
 
 const NOTES_KEY = 'react-note-app'
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [deletedId, setDeletedId] = useState(null)
+  const [deletedNote, setDeletedNote] = useState([])
   const [searchFilter, setSearchFilter] = useState({
     text: '',
     state: STATES[0],
@@ -44,8 +45,9 @@ const App = () => {
     setShowConfirmModal(false)
   }
 
-  const openConfirmModal = (id) => {
-    setDeletedId(id)
+  const openConfirmModal = (array) => {
+    // setDeletedId(id)
+    setDeletedNote(array)
     setShowConfirmModal(true)
   }
 
@@ -73,16 +75,12 @@ const App = () => {
     setNotes(updatedNotes)
   }
 
-  // Delete note from the array
-  const handleDeleteNote = (id) => {
-    const updatedNotes = notes.filter(note => note.id !== id)
+  // Delete notes from the array
+  const handleDeleteNotes = (notesToDelete) => {
+    const updatedNotes = notes.filter(note => ! notesToDelete.includes(note))
     setNotes(updatedNotes)
-    setDeletedId(null)
+    setDeletedNote([])
   }
-
-  // const handleSearchTextChange = (value) => {
-  //   setSearchtext(value)
-  // }
 
   const handleSearchFilterChange = (name, value) => {
     setSearchFilter((prev) => {
@@ -121,24 +119,11 @@ const App = () => {
         <AddNote onSaveNewNote={handleSaveNewNote} onCloseModal={closeAddModal} />
       </Modal>
       <Modal show={showConfirmModal} onClose={closeConfirmModal}>
-        <ConfirmNoteDeletion id={deletedId} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNote}></ConfirmNoteDeletion>
+        <ConfirmNoteDeletion deletedNote={deletedNote} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNotes}></ConfirmNoteDeletion>
       </Modal>
-      <div>
-        <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Aujourd'hui</h1>
-        {
-          todayNotes() && filterNotes(todayNotes(), searchFilter).length > 0 ?
-          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(todayNotes(), searchFilter)}></Notes>
-          : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
-        }
-      </div>
-      <div>
-        <h1 className="mx-2 text-sm font-semibold text-slate-600 dark:text-slate-300 border-b-2 py-1 mb-1 border-gray-200 dark:border-gray-700">Autres</h1>
-        {
-          otherNotes() && filterNotes(otherNotes(), searchFilter).length > 0 ?
-          <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filterNotes(otherNotes(), searchFilter)}></Notes>
-          : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
-        }
-      </div>
+      
+      <FieldNotes title="Aujourd'hui" filtredNotes={filterNotes(todayNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal} fieldKey='today'></FieldNotes>
+      <FieldNotes title='Autres' filtredNotes={filterNotes(otherNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal} fieldKey='other'></FieldNotes>
     </div>
   )
 }
