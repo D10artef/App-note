@@ -44,7 +44,7 @@ const AddNote = ({onCloseModal, onSaveNewNote}) => {
     }else{
       setError(true)
       setErrorText('Le titre est trop court (min: 5)')
-      setTimeout(() => setError(false), 5000)
+      setTimeout(() => setError(false), 3300)
     }
     
   }

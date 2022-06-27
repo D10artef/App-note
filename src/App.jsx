@@ -4,6 +4,7 @@ import ConfirmNoteDeletion from './components/ConfirmNoteDeletion'
 import Header from './components/Header'
 import Modal from './components/Modal'
 import FieldNotes from './components/FieldNotes'
+import Tab from './components/Tab'
 import { compareNoteByDate, getDateNow } from './utilities/UtilitiesFunction'
 import {STATES} from './utilities/UtilitiesCONST'
 
@@ -19,6 +20,8 @@ const App = () => {
   })
   const [showAddModal, setShowAddModal] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const tabItem = ['Passed', 'Prochainement']
+  const [activeTab, setActiveTab] = useState(tabItem[1])
 
   // Load notes from web storage
   useEffect(()=> {
@@ -107,10 +110,21 @@ const App = () => {
   }
   
   function otherNotes() {
-	  return notes
-		  .filter((note) => note.date !== getDateNow())
+    if(activeTab === tabItem[0]){
+      return notes
+		  .filter((note) => note.date < getDateNow())
 		  .sort(compareNoteByDate);
+    }
+    else{
+      return notes
+		  .filter((note) => note.date > getDateNow())
+		  .sort(compareNoteByDate);
+    }
+	  
   }
+
+  // Tab event
+  const handleClickTabItem = tabTitle => setActiveTab(tabTitle)
 
   return (
     <div className='min-h-screen bg-neutral-100 text-zinc-800 dark:bg-[#242432] dark:text-neutral-300'>
@@ -122,8 +136,13 @@ const App = () => {
         <ConfirmNoteDeletion deletedNote={deletedNote} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNotes}></ConfirmNoteDeletion>
       </Modal>
       
-      <FieldNotes title="Aujourd'hui" filtredNotes={filterNotes(todayNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal} fieldKey='today'></FieldNotes>
-      <FieldNotes title='Autres' filtredNotes={filterNotes(otherNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal} fieldKey='other'></FieldNotes>
+      <FieldNotes title="Aujourd'hui" filtredNotes={filterNotes(todayNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}></FieldNotes>
+      <FieldNotes title='Autres' filtredNotes={filterNotes(otherNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}>
+        <ul className='flex gap-x-3'>
+          { tabItem.map(title => <Tab title={title} key={title} active={title === activeTab ? true : false} onClickTabItem={handleClickTabItem}></Tab>) }
+        </ul>
+      </FieldNotes>
+      
     </div>
   )
 }
