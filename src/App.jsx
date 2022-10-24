@@ -20,7 +20,7 @@ const App = () => {
   })
   const [showAddModal, setShowAddModal] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const tabItem = ['Anciennement', 'Prochainement']
+  const tabItem = ['Formerly', 'Shortly']
   const [activeTab, setActiveTab] = useState(tabItem[1])
 
   // Load notes from web storage
@@ -136,8 +136,8 @@ const App = () => {
         <ConfirmNoteDeletion deletedNote={deletedNote} onCloseModal={closeConfirmModal} onConfirmDelete={handleDeleteNotes}></ConfirmNoteDeletion>
       </Modal>
       
-      <FieldNotes title="Aujourd'hui" filtredNotes={filterNotes(todayNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}></FieldNotes>
-      <FieldNotes title='Autres' filtredNotes={filterNotes(otherNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}>
+      <FieldNotes title="Today" filtredNotes={filterNotes(todayNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}></FieldNotes>
+      <FieldNotes title='Others' filtredNotes={filterNotes(otherNotes(), searchFilter)} handleToggleNote={handleToggleNote} openConfirmModal={openConfirmModal}>
         <ul className='flex gap-x-3'>
           { tabItem.map(title => <Tab title={title} key={title} active={title === activeTab ? true : false} onClickTabItem={handleClickTabItem}></Tab>) }
         </ul>

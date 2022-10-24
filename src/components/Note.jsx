@@ -19,8 +19,8 @@ const Note = ({note, onToggle, onDelete}) => {
   
 
   return (
-    <div className='rounded overflow-hidden shadow-sm border border-neutral-200 dark:border-none'>
-      <header className='px-3 pt-2 pb-1 bg-neutral-200/75  dark:bg-header-card-dark'>
+    <div className='overflow-hidden shadow-sm border border-neutral-200 dark:border-none'>
+      <header className='px-3 pt-2 pb-1 bg-neutral-200/75  dark:bg-neutral-700/50'>
         <p className='text-xtiny md:text-sm font-medium text-slate-700 text-justify first-letter:capitalize dark:text-gray-200'>{note.title}</p>
         { note.date === getDateNow() ? 
           <p className='text-[.7rem] font-semibold md:text-xs text-indigo-800 dark:text-indigo-400 text-right -tracking-wider pt-1'> {note.time} </p> : 

@@ -59,11 +59,11 @@ export function dateToString(date) {
 	let date_array = date.split("-");
 	switch (sameOr) {
 		case 0:
-			return "Aujourd'hui";
+			return "Today";
 		case 1:
-			return "Demain";
+			return "Tomorrow";
 		case -1:
-			return "Hier";
+			return "Yesterday";
 		case 4:
 			return date_array[2] + " " + MONTHS[date_array[1]] + " " + date_array[0];
 		default:

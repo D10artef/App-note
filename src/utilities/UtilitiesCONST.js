@@ -5,14 +5,14 @@ export const STATES = [
 ]
 
 export const MONTHS = {
-	"01": "Janv",
-	"02": "Fev",
-	"03": "Mars",
-	"04": "Avril",
-	"05": "Mai",
-	"06": "Juin",
-	"07": "Juil",
-	"08": "Août",
+	"01": "Jan",
+	"02": "Feb",
+	"03": "March",
+	"04": "April",
+	"05": "May",
+	"06": "June",
+	"07": "July",
+	"08": "Aug",
 	"09": "Sept",
 	"10": "Oct",
 	"11": "Nov",

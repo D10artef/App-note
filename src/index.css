@@ -7,6 +7,6 @@
     @apply text-sm pt-1 pb-0.5 border-b border-slate-400 dark:border-slate-700 focus:outline-none bg-inherit focus:border-slate-500 dark:focus:border-slate-600 text-slate-600 dark:text-gray-300 placeholder:text-xtiny placeholder:text-slate-400/50
   }
   .button-base{
-    @apply border px-3 md:px-4 py-1 text-xtiny dark:border-none tracking-wide duration-300 rounded
+    @apply  px-4 md:px-6 py-1.5 text-xtiny dark:border-none tracking-wide duration-500
   }
 }

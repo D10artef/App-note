@@ -9,7 +9,7 @@ export const InputText = ({name, value, maxLength, placeholder, onChange}) => {
   }
 
   return (
-    <input type="text" id={name} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange} className='input-base px-1'/>
+    <input type="text" id={name} name={name} maxLength={maxLength} placeholder={placeholder} value={value} onChange={handleChange} className='input-base px-1 placeholder:text-slate-400 placeholder:font-light'/>
   )
 }
 
@@ -18,7 +18,7 @@ export const TextArea = ({name, value, maxLength, placeholder, onChange}) => {
     onChange({name, value:event.target.value})
   }
   return (
-    <textarea id={name} name={name} maxLength={maxLength} placeholder={placeholder}  value={value}  onChange={handleChange} className='input-base resize-none px-1'></textarea>
+    <textarea id={name} name={name} maxLength={maxLength} placeholder={placeholder}  value={value}  onChange={handleChange} className='input-base resize-none px-1 placeholder:text-slate-400 placeholder:font-light'></textarea>
   )
 }
 
@@ -41,16 +41,16 @@ export const InputTime = ({name, value, onChange}) => {
 }
 
 export const ButtonStateNote = ({onButtonClick, state}) => {
-  let className = 'button-base flex gap-x-1 items-center'
-  let text = 'Toutes les notes'
+  let className = 'button-base flex gap-x-2 items-center'
+  let text = 'All tasks'
   let icon = <BiGridAlt/>
   if(state === 'done') {
     className += ' bg-emerald-200/80 text-emerald-700 dark:text-emerald-200 hover:bg-emerald-200 border-emerald-300 dark:bg-emerald-700/70 dark:hover:bg-emerald-700/60'
-    text = 'Notes achevées'
+    text = 'Completed Tasks'
     icon = <MdDoneAll/>
   }else if(state === 'not_done'){
     className += 'bg-rose-100/80 text-rose-600 dark:text-rose-200 hover:bg-rose-100 border-rose-200 dark:bg-rose-600/60 dark:hover:bg-rose-600/70'
-    text = 'Notes non achevées'
+    text = 'Unfinished Tasks'
     icon = <MdRemoveDone/>
   }else {
     className += ' bg-neutral-300/80 text-gray-700 dark:text-neutral-300 hover:bg-neutral-200 dark:bg-neutral-600/60 dark:hover:bg-neutral-600/90'

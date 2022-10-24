@@ -13,14 +13,14 @@ const FieldNotes = ({title, filtredNotes, handleToggleNote, openConfirmModal, ch
         
         { 
           filtredNotes && filtredNotes.length > 0 ? 
-          <button className="text-red-500 px-2 dark:text-rose-500/80 focus:outline-none focus:text-red-500/80 hover:text-red-500/80 dark:hover:text-rose-600 dark:focus:text-rose-600 text-xs underline cursor-pointer" onClick={handleClick}>Effacer</button> : ''
+          <button className="text-red-500 px-2 dark:text-rose-500/80 focus:outline-none focus:text-red-500/80 hover:text-red-500/80 dark:hover:text-rose-600 dark:focus:text-rose-600 text-sm font-medium underline cursor-pointer" onClick={handleClick}>Delete</button> : ''
         }
       </header>
       <main>
         {
           filtredNotes && filtredNotes.length > 0 ?
           <Notes onToggleNote={handleToggleNote} onConfirmDeletion={openConfirmModal} notes={filtredNotes}></Notes>
-          : <div className='font-light text-slate-400/50 text text-center p-6'><span >Aucune  note</span></div>
+          : <div className='font-light text-slate-400/50 text text-center p-10'><span >No memos | tasks</span></div>
         }
       </main>
     </div>
